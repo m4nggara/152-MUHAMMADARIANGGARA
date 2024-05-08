@@ -12,5 +12,10 @@ _Tenjo Kampung_ is a website local product and destination guidance platform. Gu
 
 ----
 
+### WireFrame
+| Home | Pencarian | Tampil Pencarian |
+| -- | -- | -- |
+| ![Home](https://github.com/m4nggara/152-MUHAMMADARIANGGARA/assets/169231752/331212a3-e78c-4c8e-9797-c3e01990e7c9) | ![Pencarian](https://github.com/m4nggara/152-MUHAMMADARIANGGARA/assets/169231752/c0119c6f-5295-4642-afee-9283462a4698) | ![Tampil Destinasi](https://github.com/m4nggara/152-MUHAMMADARIANGGARA/assets/169231752/7b725d34-6042-4bae-8026-9779bc106bd4) |
+
 ##### Disclaimer
 > _This repository is for final personal project at JDA - Jabar Digital Academy_
