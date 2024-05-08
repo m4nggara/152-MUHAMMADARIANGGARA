@@ -8,3 +8,7 @@ _This repository is for final personal project at JDA - Jabar Digital Academy_
 | JDA CODE | NAME |
 | --- | --- |
 | **152** | **Muhammad Ari Anggara** |
+
+----
+
+- ERD - [Entity Relational Diagram](https://drive.google.com/file/d/1IZmXkMUiLSKew07qa0pqdjLq_7hkTFvX/view?usp=sharing)
