@@ -31,6 +31,14 @@
             border-bottom: 2px solid #000;
         }
 
+        a.text-body:hover {
+            color: #4C9732 !important;
+        }
+
+        .content {
+            margin-bottom: 100px !important;
+        }
+
         @media only screen and (min-width: 1140px) {
             .content {
                 margin-top: 78px !important;
