@@ -10,7 +10,7 @@
 					<div class="d-sm-flex align-items-lg-start text-center text-lg-start">
 						<div class="me-lg-3 mb-3 mb-lg-0">
 							<a href="https://source.unsplash.com/random/?product/200x200?sig={{ $i }}" data-bs-popup="lightbox">
-								<img src="https://source.unsplash.com/random/200x200?sig={{ $i }}" width="100" alt="">
+								<img src="https://source.unsplash.com/random/?product/200x200?sig={{ $i }}" width="100" alt="">
 							</a>
 						</div>
 
@@ -52,10 +52,9 @@
 					</div>
 				</div>
 			@endfor
-			<!-- /list -->
 
 
-			<!-- Pagination -->
+			{{-- Pagination --}}
 			<div class="d-flex justify-content-center pt-1 mb-1">
 				<ul class="pagination pagination-flat">
 					<li class="page-item"><a href="#" class="page-link rounded-pill"><i class="ph-arrow-left"></i></a></li>
@@ -67,7 +66,6 @@
 					<li class="page-item"><a href="#" class="page-link rounded-pill"><i class="ph-arrow-right"></i></a></li>
 				</ul>
 			</div>
-			<!-- /pagination -->
 		</div>
 
 	</div>
