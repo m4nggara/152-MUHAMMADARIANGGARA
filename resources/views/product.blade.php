@@ -44,10 +44,13 @@
 
 							<div class="text-muted">152 reviews</div>
 
-							<button type="button" class="btn mt-3" style="background-color: #E9BE26 !important; border-color: #E9BE26 !important;">
-								<i class="ph-eye me-2"></i>
-								Lihat Detail
-							</button>
+							<form action="{{ route('detail', ['slug' => 'Produk ' . $i]) }}" method="post">
+								@csrf
+								<button type="submit" class="btn mt-3" style="background-color: #E9BE26 !important; border-color: #E9BE26 !important;">
+									<i class="ph-eye me-2"></i>
+									Lihat Detail
+								</button>
+							</form>
 						</div>
 					</div>
 				</div>
