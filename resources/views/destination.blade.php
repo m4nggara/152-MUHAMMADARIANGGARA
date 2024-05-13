@@ -1,9 +1,10 @@
 @extends('layouts.app', ['pageTitle' => 'Destinasi'])
 
 @section('content')
-	<div class="container-fluid pt-3">
+	<div class="container pt-3">
 		<div class="row align-items-md-stretch">
 			@php
+				// Helper for style card
 				function isPrima($number) : bool
 				{
 					if ($number == 1) return false;

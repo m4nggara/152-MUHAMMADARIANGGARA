@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid px-0">
-	<div class="p-4 p-md-5 mb-4" style="background-image: url({{ url('assets/demo/cover3.jpg') }})">
+	<div class="p-4 p-md-5 mb-4" style="background: url({{ url('assets/demo/cover3.jpg') }}) no-repeat; background-size: cover;">
 		<div class="col-md-6 px-0 text-white fw-bold">
 			<h1 class="display-4 fst-italic">Jelajahi <span class="fw-bold text-black">Keindahan</span> dan <span class="fw-bold text-black">Kearifan Lokal</span> <span class="text-nowrap">di Jawa Barat</span></h1>
 			<p class="lead my-3 text-white">Temukan pesona tersembunyi Jawa Barat dengan <span class="fw-bold">Tenjo Kampung</span>, platform yang membuka pintu gerbang menuju surga tersembunyi di pedesaan.</p>
