@@ -31,6 +31,26 @@
             border-bottom: 2px solid #000;
         }
 
+        .underline-text {
+            position: relative;
+            display: inline-block;
+        }
+
+        .underline-text.active {
+            background-color: transparent !important;
+            font-weight: bold;
+        }
+
+        .underline-text.active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px; /* Adjust this value to control the thickness of the underline */
+            width: 100%;
+            height: 2px; /* Adjust this value to control the thickness of the underline */
+            background-color: #000; /* Adjust this value to change the color of the underline */
+        }
+
         a.text-body:hover {
             color: #4C9732 !important;
         }

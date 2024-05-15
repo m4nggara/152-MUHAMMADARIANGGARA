@@ -1,9 +1,10 @@
 @extends('layouts.app', ['pageTitle' => 'Destinasi'])
 
 @section('content')
-	<div class="container-fluid pt-3">
+	<div class="container pt-3">
 		<div class="row align-items-md-stretch">
 			@php
+				// Helper for style card
 				function isPrima($number) : bool
 				{
 					if ($number == 1) return false;
@@ -19,7 +20,10 @@
 					<div class="h-100 p-5 text-white @if(isPrima($i)) bg-dark @endif rounded-3" style="@if(!isPrima($i)) background-image:url(https://source.unsplash.com/random/?destination&sig={{ $i }}) @endif">
 					<h2 class="@if(isPrima($i)) text-white @else text-black @endif">Destinasi {{ $i }}</h2>
 					<p class="@if(isPrima($i)) text-white @else text-black @endif">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab odit reprehenderit earum libero ex maiores voluptates facilis dignissimos tempore, pariatur impedit possimus explicabo quibusdam deserunt tenetur enim exercitationem saepe nihil.</p>
-					<button class="btn btn-outline-light text-white" type="button" style="background-color: #E9BE26 !important; border-color: #E9BE26 !important;">Lihat Detail</button>
+					<form action="{{ route('detail', ['slug' => 'Destinasi ' . $i]) }}" method="post">
+						@csrf
+						<button class="btn btn-outline-light text-white" type="submit" style="background-color: #E9BE26 !important; border-color: #E9BE26 !important;">Lihat Detail</button>
+					</form>
 					</div>
 				</div>
 			@endfor
