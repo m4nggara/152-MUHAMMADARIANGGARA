@@ -3,7 +3,7 @@
     <div class="container">
         <div class="navbar-brand flex-1 flex-xl-0">
             <a href="/" class="d-inline-flex align-items-center">
-                <img src="assets/images/logo.svg" alt="" class="h-48px">
+                <img src="{{ url('assets/images/logo.svg') }}" alt="" class="h-48px">
             </a>
         </div>
 

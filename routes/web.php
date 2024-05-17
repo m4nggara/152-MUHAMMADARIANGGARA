@@ -29,3 +29,13 @@ Route::post('/detail', function (Request $request) {
     return view('detail', ['slug' => $slug]);
 })->name('detail');
 
+Route::get('login', function () {
+    return view('admin.pages.login');
+})->name('login');
+
+Route::prefix('admin')->as('admin.')->group(function () {
+    Route::get('/', function () {
+        return view('admin.pages.dashboard');
+    })->name('dashboard');
+});
+
