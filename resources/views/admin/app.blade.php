@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin @yield('title')</title>
 
-    <link rel="icon" type="image/x-icon" href="assets/images/fav.ico">
+    <link rel="icon" type="image/x-icon" href="{{ url('assets/images/fav.ico') }}">
 
     {{-- fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">

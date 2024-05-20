@@ -8,6 +8,9 @@
             </a>
 
             <div class="sidebar-resize-hide ms-auto">
+                <button type="button" class="btn btn-flat btn-icon btn-sm rounded-pill border-transparent sidebar-control sidebar-main-resize d-none d-lg-inline-flex">
+                    <i class="ph-arrows-left-right"></i>
+                </button>
                 <button type="button" class="btn btn-flat btn-icon btn-sm rounded-pill border-transparent sidebar-mobile-main-toggle d-lg-none">
                     <i class="ph-x"></i>
                 </button>
@@ -26,22 +29,27 @@
                     <i class="ph-dots-three sidebar-resize-show"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#l" class="nav-link active">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link @if(Route::currentRouteName() == 'admin.dashboard') active @endif">
                         <i class="ph-house"></i>
                         <span>
                             Dashboard
                         </span>
                     </a>
                 </li>
-                <li class="nav-item nav-item-submenu">
+                @php
+                    $rolesRes = ['admin.roles.index','admin.roles.create'];
+                    $sourceMasterData = $rolesRes;
+                @endphp
+                <li class="nav-item nav-item-submenu @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $sourceMasterData)) nav-item-open @endif">
                     <a href="#" class="nav-link">
                         <i class="ph-database"></i>
                         <span>Master Data</span>
                     </a>
-                    <ul class="nav-group-sub collapse">
+                    <ul class="nav-group-sub collapse @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $sourceMasterData)) show @endif">
                         <li class="nav-item"><a href="#" class="nav-link">Data Item</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Data Kategori</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Data Admin</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.roles.index') }}" class="nav-link @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $rolesRes)) active @endif">Data Role</a></li>
                     </ul>
                 </li>
                 

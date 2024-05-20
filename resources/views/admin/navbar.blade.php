@@ -6,11 +6,11 @@
             </button>
         </div>
 
-        <div class="d-none d-lg-flex">
+        {{-- <div class="d-none d-lg-flex">
             <button type="button" class="btn btn-flat btn-icon btn-sm rounded-pill border-transparent sidebar-control sidebar-main-resize d-none d-lg-inline-flex">
                 <i class="ph-arrows-left-right"></i>
             </button>
-        </div>
+        </div> --}}
 
         <ul class="nav hstack gap-sm-1 flex-row justify-content-end w-lg-100">
             <li class="nav-item nav-item-dropdown-lg dropdown">

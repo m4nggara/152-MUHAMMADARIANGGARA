@@ -9305,6 +9305,10 @@ fieldset:disabled .btn {
     --text-opacity: 1;
     color: rgba(var(--primary-rgb), var(--text-opacity)) !important;
 }
+.text-main {
+    --text-opacity: 1;
+    color: rgba(var(--main-color-rgb), var(--text-opacity)) !important;
+}
 .text-secondary {
     --text-opacity: 1;
     color: rgba(var(--secondary-rgb), var(--text-opacity)) !important;

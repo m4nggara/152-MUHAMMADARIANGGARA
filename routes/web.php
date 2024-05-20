@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RolesController;
 
 Route::get('/', function () {
     return view('home');
@@ -37,5 +38,6 @@ Route::prefix('admin')->as('admin.')->group(function () {
     Route::get('/', function () {
         return view('admin.pages.dashboard');
     })->name('dashboard');
+    Route::resource('roles', RolesController::class);
 });
 
