@@ -37,8 +37,9 @@
                     </a>
                 </li>
                 @php
-                    $rolesRes = ['admin.roles.index','admin.roles.create'];
-                    $sourceMasterData = $rolesRes;
+                    $usersRes = ['admin.users.index','admin.users.create','admin.users.edit'];
+                    $rolesRes = ['admin.roles.index','admin.roles.create','admin.roles.edit'];
+                    $sourceMasterData = array_merge($rolesRes, $usersRes);
                 @endphp
                 <li class="nav-item nav-item-submenu @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $sourceMasterData)) nav-item-open @endif">
                     <a href="#" class="nav-link">
@@ -48,7 +49,7 @@
                     <ul class="nav-group-sub collapse @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $sourceMasterData)) show @endif">
                         <li class="nav-item"><a href="#" class="nav-link">Data Item</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Data Kategori</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Data Admin</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.users.index') }}" class="nav-link @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $usersRes)) active @endif">Data Pengguna</a></li>
                         <li class="nav-item"><a href="{{ route('admin.roles.index') }}" class="nav-link @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $rolesRes)) active @endif">Data Role</a></li>
                     </ul>
                 </li>

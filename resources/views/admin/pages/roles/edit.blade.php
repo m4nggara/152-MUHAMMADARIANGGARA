@@ -9,7 +9,7 @@
     <div class="page-header-content d-lg-flex">
         <div class="d-flex">
             <h6 class="page-title mb-0">
-                Buat Data Role
+                Edit Data Role
             </h6>
         </div>
     </div>
@@ -32,16 +32,26 @@
             </div>
             @endif
 
-            <form action="{{ route('admin.roles.store') }}" method="POST">
+            <form action="{{ route('admin.roles.update', $item->id) }}" method="POST">
+                @method('PUT')
                 @csrf
                 <div class="mb-3">
                     <label class="form-label">Nama Role:</label>
-                    <input type="text" class="form-control" placeholder="Nama role" name="name" value={{ old('name') }}>
+                    <input type="text" class="form-control" placeholder="Nama role" name="name" value="{{ $item->name }}">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Deskripsi:</label>
-                    <textarea rows="3" cols="3" class="form-control" placeholder="Masukan deskripsi role" name="desc">{{ old('desc') }}</textarea>
+                    <textarea rows="3" cols="3" class="form-control" placeholder="Masukan deskripsi role" name="desc">{{ $item->desc }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <select class="form-select" name="isactive">
+                        <option disabled>--Pilih Status--</option>
+                        <option value="1" @if(!isset($item->deleted_at)) selected @endif>Aktif</option>
+                        <option value="0" @if(isset($item->deleted_at)) selected @endif>Tidak Aktif</option>
+                      </select>
                 </div>
 
                 <div class="d-flex justify-content-end align-items-center">

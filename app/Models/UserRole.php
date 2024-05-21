@@ -6,15 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model
+class UserRole extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $table = 'user_roles';
+
+    public $incrementing = false;
 
     public $timestamps = false;
 
     protected $fillable = [
-        'name',
-        'desc',
+        'user_id',
+        'role_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -31,5 +35,4 @@ class Role extends Model
             'deleted_at' => 'datetime',
         ];
     }
-
 }
