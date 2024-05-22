@@ -57,6 +57,7 @@
 	</div>
 
     <script src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
+	<script src="{{ url('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ url('assets/js/admin.js') }}"></script>
 </body>
 </html>

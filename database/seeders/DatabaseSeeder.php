@@ -23,8 +23,9 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            SetupCategories::class,
             SetupRoles::class,
-            SetupAdminUser::class
+            SetupAdminUser::class,
         ]);
 
         
