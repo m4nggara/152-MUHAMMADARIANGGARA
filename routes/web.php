@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     return view('home');
@@ -40,6 +41,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
     Route::get('/', function () {
         return view('admin.pages.dashboard');
     })->name('dashboard');
+    Route::resource('items', ItemsController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('users', UsersController::class);
     Route::resource('roles', RolesController::class);

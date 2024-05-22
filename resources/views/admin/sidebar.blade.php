@@ -1,4 +1,4 @@
-<div class="sidebar sidebar-main sidebar-expand-lg bg-white">
+<div class="sidebar sidebar-main sidebar-expand-lg bg-white @yield('sidebar-collapse')">
 
     <div class="sidebar-section bg-opacity-10 border-bottom border-bottom-black border-opacity-10">
         <div class="sidebar-logo d-flex justify-content-center align-items-center">
@@ -37,10 +37,11 @@
                     </a>
                 </li>
                 @php
+                    $itemsRes = ['admin.items.index','admin.items.create','admin.items.edit'];
                     $categoriesRes = ['admin.categories.index','admin.categories.create','admin.categories.edit'];
                     $usersRes = ['admin.users.index','admin.users.create','admin.users.edit'];
                     $rolesRes = ['admin.roles.index','admin.roles.create','admin.roles.edit'];
-                    $sourceMasterData = array_merge($rolesRes, $usersRes);
+                    $sourceMasterData = array_merge($rolesRes, $usersRes, $categoriesRes, $itemsRes);
                 @endphp
                 <li class="nav-item nav-item-submenu @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $sourceMasterData)) nav-item-open @endif">
                     <a href="#" class="nav-link">
@@ -48,7 +49,7 @@
                         <span>Master Data</span>
                     </a>
                     <ul class="nav-group-sub collapse @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $sourceMasterData)) show @endif">
-                        <li class="nav-item"><a href="#" class="nav-link">Data Item</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.items.index') }}" class="nav-link @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $itemsRes)) active @endif">Data Item</a></li>
                         <li class="nav-item"><a href="{{ route('admin.categories.index') }}" class="nav-link @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $categoriesRes)) active @endif">Data Kategori</a></li>
                         <li class="nav-item"><a href="{{ route('admin.users.index') }}" class="nav-link @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $usersRes)) active @endif">Data Pengguna</a></li>
                         <li class="nav-item d-none"><a href="{{ route('admin.roles.index') }}" class="nav-link @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $rolesRes)) active @endif">Data Role</a></li>
