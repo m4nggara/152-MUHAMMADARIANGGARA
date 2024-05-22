@@ -38,7 +38,7 @@ class UsersController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:8',
-            'roles' => 'required'
+            // 'roles' => 'required'
         ], [
             'name.required' => 'Nama harus diisi',
             'email.required' => 'Email harus diisi',
@@ -66,7 +66,15 @@ class UsersController extends Controller
                 'created_by' => 'system'
             ]);
 
-            // roles user
+            // hardcore role admin
+            $roleAdmin = UserRole::create([
+                'role_id' => 1,
+                'user_id' => $user->id,
+                'created_at' => Carbon::now(),
+                'created_by' => 'system'
+            ]);
+
+            /* // roles user
             if(isset($data['roles']) && count($data['roles']) > 0) {
                 foreach($data['roles'] as $roleid) {
 
@@ -88,7 +96,7 @@ class UsersController extends Controller
                         'created_by' => 'system'
                     ]);
                 }
-            }
+            } */
 
             DB::commit();
         } catch(\Exception $e) {
@@ -126,7 +134,7 @@ class UsersController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users,id,'.$id,
-            'roles' => 'required',
+            // 'roles' => 'required',
             'isactive' => 'present|in:0,1'
         ], [
             'name.required' => 'Nama harus diisi',
@@ -157,7 +165,7 @@ class UsersController extends Controller
             $user->updated_by = 'system';
             $user->save();
 
-            $previouslySelectedRoleIds = $user->uroles->pluck('role_id')->toArray();
+            /* $previouslySelectedRoleIds = $user->uroles->pluck('role_id')->toArray();
             $currentlySelectedRoleIds = $data['roles']; 
             $rolesToRemove = array_diff($previouslySelectedRoleIds, $currentlySelectedRoleIds);
             $rolesToAdd = array_diff($currentlySelectedRoleIds, $previouslySelectedRoleIds);
@@ -176,7 +184,7 @@ class UsersController extends Controller
                     'created_at' => Carbon::now(),
                     'created_by' => 'system'
                 ]);
-            }
+            } */
 
 
 

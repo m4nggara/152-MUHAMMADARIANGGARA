@@ -50,7 +50,7 @@
                         <li class="nav-item"><a href="#" class="nav-link">Data Item</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Data Kategori</a></li>
                         <li class="nav-item"><a href="{{ route('admin.users.index') }}" class="nav-link @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $usersRes)) active @endif">Data Pengguna</a></li>
-                        <li class="nav-item"><a href="{{ route('admin.roles.index') }}" class="nav-link @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $rolesRes)) active @endif">Data Role</a></li>
+                        <li class="nav-item d-none"><a href="{{ route('admin.roles.index') }}" class="nav-link @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $rolesRes)) active @endif">Data Role</a></li>
                     </ul>
                 </li>
                 

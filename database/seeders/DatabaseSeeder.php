@@ -6,6 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\SetupRoles;
+use Database\Seeders\SetupAdminUser;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +24,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             SetupRoles::class,
+            SetupAdminUser::class
         ]);
+
+        
+
+
     }
 }

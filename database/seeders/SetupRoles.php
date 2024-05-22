@@ -15,7 +15,7 @@ class SetupRoles extends Seeder
     public function run(): void
     {
         $roles = [
-            'admin',
+            'administrator',
             'kontributor'
         ];
 

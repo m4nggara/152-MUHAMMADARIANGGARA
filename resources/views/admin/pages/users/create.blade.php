@@ -54,7 +54,7 @@
                     <input type="password" class="form-control" placeholder="Konfirmasi Password" name="password_confirmation">
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-3 d-none">
                     <label class="form-label">Role:</label>
                     <div class="border p-3 rounded">
                         @forelse ($roles ?? [] as $item)    
