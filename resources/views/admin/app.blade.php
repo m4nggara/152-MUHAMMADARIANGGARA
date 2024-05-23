@@ -19,6 +19,9 @@
 
     {{-- styles --}}
     <link href="{{ url('assets/css/admin.css') }}" rel="stylesheet" type="text/css">
+    
+    @stack('styles')
+    
     <style>
         * {
             font-family: 'Poppins', "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
@@ -27,17 +30,18 @@
 
 </head>
 <body>
-
-	<div class="page-content">
+    
+    {{-- navbar --}}
+    @include('admin.navbar')
+	
+    <div class="page-content">
 
         {{-- sidebar --}}
 		@include('admin.sidebar')
 
 		<div class="content-wrapper">
 
-			{{-- navbar --}}
-            @include('admin.navbar')
-
+            @yield('page-header')
 
 			<div class="content-inner">
 
@@ -58,6 +62,12 @@
 
     <script src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ url('vendor/jquery/jquery.min.js') }}"></script>
+
+    @stack('script-lib')
+
     <script src="{{ url('assets/js/admin.js') }}"></script>
+
+    @stack('script')
+
 </body>
 </html>

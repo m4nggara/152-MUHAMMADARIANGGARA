@@ -90,7 +90,7 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:categories',
+            'name' => 'required|unique:categories,id,'.$id,
             'desc' => 'present|nullable',
             'icon_type' => 'required|in:icon,path',
             'icon_source' => 'present|nullable',
@@ -103,7 +103,7 @@ class CategoryController extends Controller
         ]);
  
         if ($validator->fails()) {
-            return redirect()->route('admin.categories.update', $id)
+            return redirect()->route('admin.categories.edit', $id)
                         ->withErrors($validator)
                         ->withInput();
         }

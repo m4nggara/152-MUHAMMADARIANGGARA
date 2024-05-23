@@ -2,15 +2,19 @@
 
     <div class="sidebar-section bg-opacity-10 border-bottom border-bottom-black border-opacity-10">
         <div class="sidebar-logo d-flex justify-content-center align-items-center">
-            <a href="{{ route('admin.dashboard') }}" class="d-inline-flex align-items-center py-2">
+			<h6 class="sidebar-resize-hide flex-grow-1 my-auto fs-base text-muted d-none d-lg-inline">Menu</h6>
+            <a href="{{ route('admin.dashboard') }}" class="d-inline-flex d-lg-none align-items-center py-2">
                 <img src="{{ url('assets/images/logo_icon.svg') }}" class="sidebar-logo-icon" alt="">
                 <img src="{{ url('assets/images/logo_text_dark2.svg') }}" class="sidebar-resize-hide ms-1 pt-1" height="18" alt="">
             </a>
 
-            <div class="sidebar-resize-hide ms-auto">
+            <div class="mx-auto">
                 <button type="button" class="btn btn-flat btn-icon btn-sm rounded-pill border-transparent sidebar-control sidebar-main-resize d-none d-lg-inline-flex">
                     <i class="ph-arrows-left-right"></i>
                 </button>
+            </div>
+
+            <div class="sidebar-resize-hide ms-auto">
                 <button type="button" class="btn btn-flat btn-icon btn-sm rounded-pill border-transparent sidebar-mobile-main-toggle d-lg-none">
                     <i class="ph-x"></i>
                 </button>
@@ -25,7 +29,7 @@
             <ul class="nav nav-sidebar" data-nav-type="accordion">
 
                 <li class="nav-item-header">
-                    <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Menu</div>
+                    <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide d-lg-none d-flex">Menu</div>
                     <i class="ph-dots-three sidebar-resize-show"></i>
                 </li>
                 <li class="nav-item">

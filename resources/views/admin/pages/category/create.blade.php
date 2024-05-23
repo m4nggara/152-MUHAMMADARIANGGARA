@@ -4,11 +4,11 @@
     - Master Kategori
 @endsection
 
-@section('content-header')
-<div class="page-header">
+@section('page-header')
+<div class="page-header page-header-light page-header-static shadow">
     <div class="page-header-content d-lg-flex">
         <div class="d-flex">
-            <h6 class="page-title mb-0">
+            <h6 class="page-title py-2 my-1">
                 Tambah Kategori
             </h6>
         </div>
@@ -16,8 +16,20 @@
 </div>
 @endsection
 
+@section('content-header')
+{{-- <div class="page-header">
+    <div class="page-header-content d-lg-flex">
+        <div class="d-flex">
+            <h6 class="page-title mb-0">
+                Tambah Kategori
+            </h6>
+        </div>
+    </div>
+</div> --}}
+@endsection
+
 @section('content')
-<div class="content pt-0">
+<div class="content">
     <div class="card">
 
         <div class="card-body">

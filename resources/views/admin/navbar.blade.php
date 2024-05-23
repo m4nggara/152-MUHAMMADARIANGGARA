@@ -6,6 +6,13 @@
             </button>
         </div>
 
+        <div class="navbar-brand flex-1 flex-lg-0">
+            <a href="{{ route('admin.dashboard') }}" class="d-none d-lg-inline-flex align-items-center py-2">
+                <img src="{{ url('assets/images/logo_icon.svg') }}" class="sidebar-logo-icon" alt="">
+                <img src="{{ url('assets/images/logo_text_dark2.svg') }}" class="sidebar-resize-hide ms-1 pt-1" height="18" alt="">
+            </a>
+        </div>
+
         {{-- <div class="d-none d-lg-flex">
             <button type="button" class="btn btn-flat btn-icon btn-sm rounded-pill border-transparent sidebar-control sidebar-main-resize d-none d-lg-inline-flex">
                 <i class="ph-arrows-left-right"></i>

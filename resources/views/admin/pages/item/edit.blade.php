@@ -14,7 +14,7 @@
     <div class="page-header-content d-lg-flex">
         <div class="d-flex">
             <h6 class="page-title py-2 my-1">
-                Tambah Item
+                Ubah Item
             </h6>
         </div>
     </div>
@@ -60,64 +60,75 @@
             </div>
             @endif
 
-            <form id="form" action="{{ route('admin.items.store') }}" method="POST" enctype="multipart/form-data">
+            <form id="form" action="{{ route('admin.items.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+                @method('PUT')
                 @csrf
                 <div class="mb-3">
                     <label class="form-label">Kategori:</label>
                     <select name="category" class="form-select">
-                        <option value="" disabled selected>--Pilih Kategori--</option>
-                        @foreach ($categories as $item)
-                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        <option value="" disabled>--Pilih Kategori--</option>
+                        @foreach ($categories as $cat)
+                        <option value="{{ $cat->id }}" @if($item->category_id == $cat->id) selected @endif>{{ $cat->name }}</option>
                         @endforeach
                     </select>
                 </div>
                 
                 <div class="mb-3">
                     <label class="form-label">Judul Item:</label>
-                    <input type="text" class="form-control" placeholder="Nama Item" name="name" value={{ old('name') }}>
+                    <input type="text" class="form-control" placeholder="Nama Item" name="name" value="{{ $item->name }}">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Photo Banner: </label>
+                    <input type="hidden" name="photo_banner_old" value="{{ $item->img_path_banner }}" id="photoBanerRef">
                     <input type="file" name="photo_banner" class="form-control file-input-caption" accept="image/*" data-allowed-file-extensions='["jpg", "png"]' data-show-upload="false">
                     <span class="form-text">*Hanya file berektensi <code>.jpg</code> dan <code>.png</code></span>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Deskripsi: </label>
-                    <textarea id="ckeditor" rows="14" cols="14" class="form-control" placeholder="Masukan deskripsi" name="desc">{{ old('desc') }}</textarea>
+                    <textarea id="ckeditor" rows="14" cols="14" class="form-control" placeholder="Masukan deskripsi" name="desc">{!! $item->desc !!}</textarea>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Owner:</label>
-                    <input type="text" class="form-control" placeholder="Nama Owner" name="owner" value={{ old('owner') }}>
+                    <input type="text" class="form-control" placeholder="Nama Owner" name="owner" value="{{ $item->owner }}">
                 </div>
 
                 <div class="mb-3 row">
                     <div class="col-md-6">
                         <label class="form-label">Nomor Kontak:</label>
-                        <input type="text" class="form-control" placeholder="Masukan nomor kontak" name="phone" value={{ old('phone') }}>
+                        <input type="text" class="form-control" placeholder="Masukan nomor kontak" name="phone" value="{{ $item->phone }}">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Email:</label>
-                        <input type="email" class="form-control" placeholder="Masukan email" name="email" value={{ old('email') }}>
+                        <input type="email" class="form-control" placeholder="Masukan email" name="email" value="{{ $item->email }}">
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Alamat Lengkap: </label>
-                    <textarea rows="2" cols="2" class="form-control" placeholder="Masukan alamat" name="address">{{ old('address') }}</textarea>
+                    <textarea rows="2" cols="2" class="form-control" placeholder="Masukan alamat" name="address">{{ $item->address }}</textarea>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Link Google Maps: <span class="text-muted">(optional)</span></label>
-                    <input type="text" class="form-control" placeholder="Masukan link google" name="maps" value={{ old('maps') }}>
+                    <input type="text" class="form-control" placeholder="Masukan link google" name="maps" value="{{ $item->google_maps }}">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Photo Lainnya: <span class="text-muted">(optional)</span></label>
                     <input type="file" name="photo_lain[]" class="form-control file-input" multiple="multiple" accept="image/*" data-allowed-file-extensions='["jpg", "png"]' data-show-upload="false">
                     <span class="form-text">*Hanya file berektensi <code>.jpg</code> dan <code>.png</code></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <select class="form-select" name="isactive">
+                        <option disabled>--Pilih Status--</option>
+                        <option value="1" @if(!isset($item->deleted_at) || empty($item->deleted_at)) selected @endif>Aktif</option>
+                        <option value="0" @if(isset($item->deleted_at)) selected @endif>Tidak Aktif</option>
+                      </select>
                 </div>
 
                 {{-- <div class="d-flex justify-content-end align-items-center">
@@ -205,6 +216,41 @@
 
 
             //
+            // Caption
+            //
+
+            const url = "{{ Storage::disk('public')->url($item->img_path_banner) }}";
+
+            $('.file-input-caption').fileinput({
+                browseLabel: 'Browse',
+                browseIcon: '<i class="ph-file-plus me-2"></i>',
+                uploadIcon: '<i class="ph-file-arrow-up me-2"></i>',
+                removeIcon: '<i class="ph-x fs-base me-2"></i>',
+                layoutTemplates: {
+                    icon: '<i class="ph-check"></i>'
+                },
+                browseClass: 'btn btn-secondary',
+                uploadClass: 'btn btn-light',
+                removeClass: 'btn btn-light',
+                initialCaption: "No file selected",
+                previewZoomButtonClasses: previewZoomButtonClasses,
+                previewZoomButtonIcons: previewZoomButtonIcons,
+                fileActionSettings: fileActionSettings,
+                initialPreview: [
+                    url,
+                ],
+                initialPreviewConfig: [
+                    {caption: "{{ str_replace('iresources/', '', $item->img_path_banner) }}", size: "{{ (Storage::disk('public')->exists($item->img_path_banner) ? Storage::disk('public')->size($item->img_path_banner) : null) }}", key: {{ $item->id }}, url: '{$url}', showDrag: false},
+                ],
+                initialCaption: "{{ str_replace('iresources/', '', $item->img_path_banner) }}",
+                initialPreviewAsData: true,
+                overwriteInitial: true,
+                // showCaption: false,
+                dropZoneEnabled: false
+            });
+
+
+            //
             // Basic
             //
 
@@ -226,27 +272,12 @@
             });
 
 
-            //
-            // Caption
-            //
+            $('.file-input-caption').on('change', function(event) {
+                $('#photoBanerRef').val(null);
+            });
 
-            $('.file-input-caption').fileinput({
-                browseLabel: 'Browse',
-                browseIcon: '<i class="ph-file-plus me-2"></i>',
-                uploadIcon: '<i class="ph-file-arrow-up me-2"></i>',
-                removeIcon: '<i class="ph-x fs-base me-2"></i>',
-                layoutTemplates: {
-                    icon: '<i class="ph-check"></i>'
-                },
-                browseClass: 'btn btn-secondary',
-                uploadClass: 'btn btn-light',
-                removeClass: 'btn btn-light',
-                initialCaption: "No file selected",
-                previewZoomButtonClasses: previewZoomButtonClasses,
-                previewZoomButtonIcons: previewZoomButtonIcons,
-                fileActionSettings: fileActionSettings,
-                showCaption: false,
-                dropZoneEnabled: false
+            $('.file-input-caption').on('fileclear', function(event) {
+                $('#photoBanerRef').val(null);
             });
 
         };
