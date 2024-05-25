@@ -22,27 +22,34 @@
         <ul class="nav hstack gap-sm-1 flex-row justify-content-end w-lg-100">
             <li class="nav-item nav-item-dropdown-lg dropdown">
                 <a href="#" class="navbar-nav-link align-items-center rounded-pill p-1" data-bs-toggle="dropdown">
-                    <span class="d-none d-lg-inline-block mx-lg-2">Muhammad Ari Anggara</span>
+                    <span class="d-none d-lg-inline-block mx-lg-2">{{ Auth::user()->name }}</span>
                     <div class="status-indicator-container">
-                        <img src="{{ url('assets/demo/face2.jpg') }}" class="w-32px h-32px rounded-pill" alt="">
+                        {{-- <img src="{{ url('assets/demo/face2.jpg') }}" class="w-32px h-32px rounded-pill" alt=""> --}}
+                        <div class="w-32px h-32px border border-black rounded-pill text-center">
+                            <i class=" ph-user fs-1 "></i>
+                        </div>
                         <span class="status-indicator bg-success"></span>
                     </div>
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a href="#" class="dropdown-item">
+                    <a href="{{ route('admin.profile.index') }}" class="dropdown-item">
                         <i class="ph-user-circle me-2"></i>
                         Profil
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
+                    <a href="{{ route('admin.profile.setting') }}" class="dropdown-item">
                         <i class="ph-gear me-2"></i>
                         Pengaturan
                     </a>
-                    <a href="{{ route('login') }}" class="dropdown-item">
+                    <button class="dropdown-item" onclick="$('#form-logout').submit();">
                         <i class="ph-sign-out me-2"></i>
                         Sign out
-                    </a>
+                    </button>
+
+                    <form id="form-logout" class="d-none" action="{{ route('logout') }}" method="post">
+                        @csrf
+                    </form>
                 </div>
             </li>
         </ul>

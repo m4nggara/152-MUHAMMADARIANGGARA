@@ -36,7 +36,8 @@
 
 				<div class="content d-flex justify-content-center align-items-center">
 
-					<form class="login-form" action="{{ route('admin.dashboard') }}">
+					<form class="login-form" action="{{ route('login.auth') }}" method="POST">
+						@csrf
 						<div class="card mb-0">
 							<div class="card-body">
 								<div class="text-center mb-3">
@@ -47,10 +48,21 @@
 									<span class="d-block text-muted">Login</span>
 								</div>
 
+								@if ($errors->any())
+								<div class="alert alert-danger border-0 alert-dismissible fade show">
+									<ul>
+										@foreach ($errors->all() as $error)
+											<li>{{ $error }}</li>
+										@endforeach
+									</ul>
+									<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+								</div>
+								@endif
+
 								<div class="mb-3">
 									<label class="form-label">Username</label>
 									<div class="form-control-feedback form-control-feedback-start">
-										<input type="text" class="form-control" placeholder="john@doe.com">
+										<input type="text" class="form-control" placeholder="tenjo@kampung.com" name="email" value="admin@tenjokampung.com">
 										<div class="form-control-feedback-icon">
 											<i class="ph-user-circle text-muted"></i>
 										</div>
@@ -60,7 +72,7 @@
 								<div class="mb-3">
 									<label class="form-label">Password</label>
 									<div class="form-control-feedback form-control-feedback-start">
-										<input type="password" class="form-control" placeholder="•••••••••••">
+										<input type="password" class="form-control" placeholder="•••••••••••" name="password" value="12345678">
 										<div class="form-control-feedback-icon">
 											<i class="ph-lock text-muted"></i>
 										</div>
