@@ -54,7 +54,7 @@
                     </a>
                     <ul class="nav-group-sub collapse @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $sourceMasterData)) show @endif">
                         <li class="nav-item"><a href="{{ route('admin.items.index') }}" class="nav-link @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $itemsRes)) active @endif">Data Item</a></li>
-                        <li class="nav-item"><a href="{{ route('admin.categories.index') }}" class="nav-link @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $categoriesRes)) active @endif">Data Kategori</a></li>
+                        <li class="nav-item d-none"><a href="{{ route('admin.categories.index') }}" class="nav-link @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $categoriesRes)) active @endif">Data Kategori</a></li>
                         <li class="nav-item"><a href="{{ route('admin.users.index') }}" class="nav-link @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $usersRes)) active @endif">Data Pengguna</a></li>
                         <li class="nav-item d-none"><a href="{{ route('admin.roles.index') }}" class="nav-link @if(\App\Helpers\Helper::isNodeMenu(Route::currentRouteName(), $rolesRes)) active @endif">Data Role</a></li>
                     </ul>
