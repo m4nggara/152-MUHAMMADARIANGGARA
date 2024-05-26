@@ -86,6 +86,8 @@
                         <th>Kontak</th>
                         <th>IMG Banner</th>
                         <th>Status</th>
+                        <th>Dibuat</th>
+                        <th>Terakhir Diperbaharui</th>
                         <th>Ubah</th>
                     </tr>
                 </thead>
@@ -98,8 +100,10 @@
                         {{-- <td>{{ $item->desc }}</td> --}}
                         <td>{{ $item->owner }}</td>
                         <td>{{ $item->address }} @if(isset($item->google_maps)) <a href="{{ $item->google_maps }}" target="_blank">[maps]</a> @endif <br><br> <span class="text-muted">Phone:</span> {{ $item->phone ?? '-' }} <br> <span class="text-muted">Email:</span> {{ $item->email ?? '-' }}</td>
-                        <td><img src="{{ Storage::disk('public')->url($item->img_path_banner) }}" alt="{{ $item->name }}" width="60" height="60"></td>
+                        <td><img src="@if(Storage::disk('public')->exists($item->img_path_banner)) {{ Storage::disk('public')->url($item->img_path_banner) }} @else {{ $item->img_path_banner }}  @endif" alt="{{ $item->name }}" width="60" height="60"></td>
                         <td>{!! isset($item->deleted_at) ? '<span class="badge bg-danger">Tidak Aktif</span>' : '<span class="badge bg-success">Aktif</span>' !!}</td>
+                        <td>{{ $item->created_at }}</td>
+                        <td>{{ $item->updated_at ?? '-' }}</td>
                         <td>
                             <a class="p-1" href="{{ route('admin.items.edit', $item->id) }}">
                                 <i class="fas fa-pen text-main m-1"></i>

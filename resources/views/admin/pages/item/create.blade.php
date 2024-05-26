@@ -74,7 +74,7 @@
                 
                 <div class="mb-3">
                     <label class="form-label">Judul Item:</label>
-                    <input type="text" class="form-control" placeholder="Nama Item" name="name" value={{ old('name') }}>
+                    <input type="text" class="form-control" placeholder="Nama Item" name="name" value="{{ old('name') }}">
                 </div>
 
                 <div class="mb-3">
@@ -90,17 +90,17 @@
 
                 <div class="mb-3">
                     <label class="form-label">Owner:</label>
-                    <input type="text" class="form-control" placeholder="Nama Owner" name="owner" value={{ old('owner') }}>
+                    <input type="text" class="form-control" placeholder="Nama Owner" name="owner" value="{{ old('owner') }}">
                 </div>
 
                 <div class="mb-3 row">
                     <div class="col-md-6">
                         <label class="form-label">Nomor Kontak:</label>
-                        <input type="text" class="form-control" placeholder="Masukan nomor kontak" name="phone" value={{ old('phone') }}>
+                        <input type="text" class="form-control" placeholder="Masukan nomor kontak" name="phone" value="{{ old('phone') }}">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Email:</label>
-                        <input type="email" class="form-control" placeholder="Masukan email" name="email" value={{ old('email') }}>
+                        <input type="email" class="form-control" placeholder="Masukan email" name="email" value="{{ old('email') }}">
                     </div>
                 </div>
 
@@ -111,7 +111,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Link Google Maps: <span class="text-muted">(optional)</span></label>
-                    <input type="text" class="form-control" placeholder="Masukan link google" name="maps" value={{ old('maps') }}>
+                    <input type="text" class="form-control" placeholder="Masukan link google" name="maps" value="{{ old('maps') }}">
                 </div>
 
                 <div class="mb-3">

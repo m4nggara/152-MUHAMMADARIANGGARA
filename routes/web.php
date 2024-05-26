@@ -31,10 +31,11 @@ Route::match(['post', 'get'], '/search', function (Request $request) {
     return view('search', ['term' => $term]);
 })->name('search');
 
-Route::post('/detail', function (Request $request) {
-    $slug = $request->slug;
-    return view('detail', ['slug' => $slug]);
-})->name('detail');
+// Route::post('/detail', function (Request $request) {
+//     $slug = $request->slug;
+//     return view('detail', ['slug' => $slug]);
+// })->name('detail');
+Route::match(['GET', 'POST'],'/detail/{slug}', [ItemsController::class, 'show'])->name('detail');
 
 
 Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware(Authenticate::class);

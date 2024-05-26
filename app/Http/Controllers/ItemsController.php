@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,7 +18,7 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        $items = Item::with('category')->withTrashed()->get();
+        $items = Item::with('category')->withTrashed()->orderByDesc('id')->get();
         return view('admin.pages.item.index', ['items' => $items]);
     }
 
@@ -67,7 +69,13 @@ class ItemsController extends Controller
         try {
             $data = $request->all();
 
+            $uuid = Str::uuid()->toString();
+            while(Item::where('slug', $uuid)->exists()) {
+                $uuid = Str::uuid()->toString();
+            }
+
             $item = Item::create([
+                'slug' => $uuid,
                 'name' => $data['name'],
                 'desc' => $data['desc'],
                 'owner' => $data['owner'],
@@ -77,7 +85,7 @@ class ItemsController extends Controller
                 'google_maps' => $data['maps'],
                 'category_id' => $data['category'],
                 'created_at' => now(),
-                'created_by' => 'system'
+                'created_by' => Auth::user()->id // 'system'
             ]);
     
             $file = $request->photo_banner;
@@ -103,9 +111,16 @@ class ItemsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        //
+        $item = Item::where('slug', $slug)->first();
+
+        if(!isset($item)) {
+            return redirect()->back()->withErrors('Oops! Terjadi kesalahan...')
+            ->withInput();
+        }
+
+        return view('detail', ['item' => $item]);
     }
 
     /**
@@ -195,7 +210,7 @@ class ItemsController extends Controller
             }
 
             $item->updated_at = now();
-            $item->updated_by = 'system';
+            $item->updated_by = Auth::user()->id; //'system';
             $item->save();
 
             DB::commit();

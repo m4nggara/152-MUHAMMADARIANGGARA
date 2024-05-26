@@ -60,14 +60,14 @@
 			<div class="card card-body">
 				<div class="d-sm-flex align-items-lg-start text-center text-lg-start">
 					<div class="me-lg-3 mb-3 mb-lg-0">
-						{{-- <a href="https://source.unsplash.com/random/?product/200x200?sig={{ $i }}" data-bs-popup="lightbox">
-							<img src="https://source.unsplash.com/random/?product/200x200?sig={{ $i }}" width="100" alt="">
-						</a> --}}
-						{{-- <a href="{{(Storage::exists($item->img_path_banner) ? Storage::url($item->img_path_banner) : $item->img_path_banner)}}" data-bs-popup="lightbox">
-							<img src="{{(Storage::exists($item->img_path_banner) ? Storage::url($item->img_path_banner) : $item->img_path_banner)}}" width="100" alt="">
-						</a> --}}
-						<a href="{{Storage::url($item->img_path_banner)}}" data-bs-popup="lightbox">
-							<img src="{{Storage::url($item->img_path_banner)}}" width="100" alt="">
+						@php
+							$urlImg = $item->img_path_banner;
+							if(Storage::disk('public')->exists($urlImg)) {
+								$urlImg = Storage::disk('public')->url($urlImg);
+							}
+						@endphp
+						<a href="{{$urlImg}}" data-bs-popup="lightbox">
+							<img src="{{$urlImg}}" width="100" alt="">
 						</a>
 					</div>
 
@@ -101,9 +101,9 @@
 							<i class="ph-star fs-base lh-base align-top text-warning"></i>
 						</div>
 
-						<div class="text-muted">152 reviews</div>
+						<div class="text-muted">152 viewers</div>
 
-						<form action="{{ route('detail', ['slug' => 'Produk ' . $i]) }}" method="post">
+						<form action="{{ route('detail', ['slug' => $item->slug]) }}" method="post">
 							@csrf
 							<button type="submit" class="btn mt-3" style="background-color: #E9BE26 !important; border-color: #E9BE26 !important;">
 								<i class="ph-eye me-2"></i>
@@ -114,7 +114,15 @@
 				</div>
 			</div>
 			@empty
-				
+			<div class="row col-lg-6 mx-auto">
+				<div class="alert bg-warning text-white alert-icon-start alert-dismissible fade show border-0">
+					<span class="alert-icon bg-black bg-opacity-20">
+						<i class="ph-warning-circle"></i>
+					</span>
+					<span class="fw-semibold">Oops!</span> Sayangnya <a href="#" class="alert-link text-reset">daftar produk</a>, tidak ditemukan saat ini.
+					{{-- <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button> --}}
+				</div>
+			</div>
 			@endforelse
 
 
@@ -131,13 +139,33 @@
 					$endPage = min($product->lastPage(), $product->currentPage() + floor($visibleRange / 2));
 					@endphp
 
-					@for ($page = $startPage; $page <= $endPage; $page++)
-					{{-- @foreach ($product->getUrlRange(1, $product->lastPage()) as $key => $page) --}}
+					@if ($product->currentPage() - 2 > 0)
+						<li class="page-item">
+							<a href="{{ $product->getUrlRange(1, 1)[1] }}" class="page-link rounded-pill">1</a>
+						</li>
+						@if ($startPage - 2 > 0)
+							<li class="page-item">
+								<a href="#" class="page-link rounded-pill disabled">...</a>
+							</li>
+						@endif
+					@endif
 
-					<li class="page-item {{ (int) $page === $product->currentPage() ? 'active' : '' }}"><a href="{{  $product->getUrlRange(1, $product->lastPage())[$page] }}" class="page-link rounded-pill text-black" style="@if((int) $page === $product->currentPage()) background-color: #E9BE26 !important; border-color: #E9BE26 !important;@endif" >{{ $page }}</a></li>
+					@if($product->lastPage() - 1 > 0) 
+						@for ($page = $startPage; $page <= $endPage; $page++)
+						<li class="page-item {{ (int) $page === $product->currentPage() ? 'active' : '' }}"><a href="{{  $product->getUrlRange(1, $product->lastPage())[$page] }}" class="page-link rounded-pill text-black" style="@if((int) $page === $product->currentPage()) background-color: #E9BE26 !important; border-color: #E9BE26 !important;@endif" >{{ $page }}</a></li>
+						@endfor
+					@endif
 
-					{{-- @endforeach --}}
-					@endfor
+					@if ($product->lastPage() - $endPage > 0)
+						@if ($product->lastPage() - $endPage > 1)
+							<li class="page-item">
+								<a href="#" class="page-link rounded-pill disabled">...</a>
+							</li>
+						@endif	
+						<li class="page-item">
+							<a href="{{ $product->getUrlRange(1, $product->lastPage())[$product->lastPage()] }}" class="page-link rounded-pill">{{ $product->lastPage() }}</a>
+						</li>
+					@endif
 
 					@if ($product->hasMorePages())
 					<li class="page-item"><a href="{{ $product->nextPageUrl() }}" class="page-link rounded-pill"><i class="ph-arrow-right"></i></a></li>

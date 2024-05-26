@@ -4,42 +4,42 @@
 	<div class="container pt-3">
 		<div class="row">
             <h4>
-                {{ $slug }}
-                <span class="badge bg-transparant border text-body fs-xs ms-3" style="border-color: #4C9732 !important;">Produk</span>
+                {{ $item->name }}
+                <span class="badge bg-transparant border text-body fs-xs ms-3" style="border-color: #4C9732 !important;">{{ $item->category->name }}</span>
             </h3>
             <ul class="list-inline list-inline-bullet mb-3 mb-lg-2 fs-sm">
-                <li class="list-inline-item"><a href="#" class="text-muted">By Admin</a></li>
-                <li class="list-inline-item"><a href="#" class="text-muted">{{ \Carbon\Carbon::now()->format('d F Y H:i:s') }}</a></li>
+                <li class="list-inline-item"><a href="#" class="text-muted">By {{ $item->userBy->name ?? $item->created_by }}</a></li>
+                <li class="list-inline-item"><a href="#" class="text-muted">{{ \Carbon\Carbon::parse($item->created_at)->format('d F Y H:i:s') }}</a></li>
             </ul>
-            <div class="p-4 p-md-5 mb-4" style="background: url('https://source.unsplash.com/random/?product') no-repeat center; background-size: cover; min-height: 300px;"></div>
+            <div class="p-4 p-md-5 mb-4" style="background: url('@if(Storage::disk('public')->exists($item->img_path_banner)) {{ Storage::disk('public')->url($item->img_path_banner) }} @else {{ $item->img_path_banner }}  @endif') no-repeat center; background-size: cover; min-height: 300px;"></div>
         </div>
         <div class="row g-3">
-            <div class="col-md-8">
+            <div class="col-md-8 ps-0">
                 <div class="card card-body">
-                    <h6 class="card-title">Deskripsi</h6>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur accusamus similique quam quis, illum adipisci et voluptatum, accusantium beatae sed doloribus voluptas recusandae possimus eligendi id obcaecati magnam, architecto omnis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias nisi quibusdam officia suscipit sint saepe quisquam necessitatibus optio sed. Laboriosam, praesentium eius? Amet suscipit ea odio, fuga sapiente ullam necessitatibus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Est at iste voluptatem minima deleniti hic. Consectetur est iusto ut velit fugiat recusandae architecto in illum placeat ratione ipsum, ea quae!
+                    {{-- <h6 class="card-title">Deskripsi</h6> --}}
+                    {!! $item->desc !!}
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 pe-0">
                 <div class="card card-body">
                     <h6 class="card-title">Kontak dan Lokasi</h6>
                     <ul class="nav flex-column">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="@if(isset($item->phone)) {{ 'tel:' . $item->phone }} @else '#' @endif" class="nav-link">
 								<i class="ph-phone me-2"></i>
-								085295559310
+								{{ $item->phone ?? '-' }}
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="@if(isset($item->email)) {{ 'mailto:' . $item->email }} @else '#' @endif" class="nav-link">
 								<i class="ph-envelope me-2"></i>
-								hi.manggara@gmail.com
+								{{ $item->email ?? '-' }}
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="@if(isset($item->google_maps)) {{ $item->google_maps }} @else '#' @endif" class="nav-link" target="_blank">
 								<i class="ph-house-line me-2"></i>
-								Jl. Kenangan No.152 Kota Cimahi
+								{{ $item->address ?? '-' }}
 							</a>
 						</li>
 					</ul>

@@ -33,6 +33,7 @@ class Item extends Model
         'created_by',
         'updated_by',
         'deleted_by',
+        'slug'
     ];
 
     protected $hidden = [
@@ -51,6 +52,11 @@ class Item extends Model
     public function category(): HasOne
     {
         return $this->hasOne(Category::class, 'id', 'category_id');
+    }
+
+    public function userBy(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'created_by');
     }
 
     public function scopeProduct(Builder $query): void
