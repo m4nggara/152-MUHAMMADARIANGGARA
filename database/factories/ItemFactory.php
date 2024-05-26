@@ -24,7 +24,7 @@ class ItemFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
             'img_path_banner' => fake()->imageUrl(360, 360, 'items', true, 'temp', false, 'jpg'),
-            'desc' => fake()->paragraph(10),
+            'desc' => fake()->paragraph(100),
             'owner' => fake()->company(),
             'slug' => fake()->uuid(),
             'created_at' => now(),
