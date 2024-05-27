@@ -25,19 +25,19 @@
                     <h6 class="card-title">Kontak dan Lokasi</h6>
                     <ul class="nav flex-column">
 						<li class="nav-item">
-							<a href="@if(isset($item->phone)) {{ 'tel:' . $item->phone }} @else '#' @endif" class="nav-link">
+							<a href="@if(isset($item->phone)) {{ 'tel:' . $item->phone }} @endif" class="nav-link">
 								<i class="ph-phone me-2"></i>
 								{{ $item->phone ?? '-' }}
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="@if(isset($item->email)) {{ 'mailto:' . $item->email }} @else '#' @endif" class="nav-link">
+							<a href="@if(isset($item->email)) {{ 'mailto:' . $item->email }} @endif" class="nav-link">
 								<i class="ph-envelope me-2"></i>
 								{{ $item->email ?? '-' }}
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="@if(isset($item->google_maps)) {{ $item->google_maps }} @else '#' @endif" class="nav-link" target="_blank">
+							<a href="@if(isset($item->google_maps)) {{ $item->google_maps }} @endif" class="nav-link text-muted @if(!isset($item->google_maps)) disabled @endif" target="_blank">
 								<i class="ph-house-line me-2"></i>
 								{{ $item->address ?? '-' }}
 							</a>
