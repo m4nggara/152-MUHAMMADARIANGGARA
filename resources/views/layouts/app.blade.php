@@ -4,6 +4,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@if(isset($pageTitle)) {{ $pageTitle }} - @endif Tenjo Kampung</title>
     
     <link rel="icon" type="image/x-icon" href="{{ url('assets/images/fav.ico') }}">
@@ -92,6 +93,10 @@
 
 
 	<script src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
+	<script src="{{ url('vendor/jquery/jquery.min.js') }}"></script>
+	{{-- <script src="{{ url('assets/js/app.js') }}"></script> --}}
+
+    @stack('script')
 
 </body>
 </html>

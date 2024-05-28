@@ -76,18 +76,18 @@
 							<a href="#" style="color: #4C9732 !important;">{{ $item->name }}</a>
 						</h6>
 
-						<ul class="list-inline list-inline-bullet mb-3 mb-lg-2">
+						<ul class="list-inline list-inline-bullet mb-3 mb-lg-2 text-muted">
 							<li class="list-inline-item"><a href="#" class="text-muted">By Admin</a></li>
 							<li class="list-inline-item"><a href="#" class="text-muted">{{ \Carbon\Carbon::parse($item->created_at)->format('d F Y H:i:s') }}</a></li>
 						</ul>
 
-						<p class="mb-3">
+						<p class="mb-3 text-muted">
 							{!! substr(strip_tags($item->desc), 0, 600) !!} ...
 						</p>
 
-						<ul class="list-inline list-inline-bullet mb-0">
-							<li class="list-inline-item">Produk dari <a href="#" style="color: #4C9732 !important;">{{ $item->owner }}</a></li>
-							<li class="list-inline-item">Email : <a href="mailto:{{ $item->email }}" class="text-muted">{{ $item->email }}</a></li>
+						<ul class="list-inline list-inline-bullet mb-0 text-muted">
+							<li class="list-inline-item">Produk dari <a href="" style="color: #4C9732 !important;">{{ $item->owner }}</a></li>
+							<li class="list-inline-item">Kontak : <a href="tel:{{ $item->phone }}" class="text-muted"><i class="ph-phone mx-1"></i>{{ $item->phone }}</a><a href="mailto:{{ $item->email }}" class="text-muted"><i class="ph-envelope mx-1"></i>{{ $item->email }}</a></li>
 						</ul>
 					</div>
 

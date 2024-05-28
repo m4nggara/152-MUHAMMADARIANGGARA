@@ -8,6 +8,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\Authenticate;
@@ -20,11 +21,8 @@ Route::get('/discover', function () {
     return view('discover');
 })->name('discover');
 
-Route::get('/product', [ProductController::class, 'list'])->name('product');
-
-Route::get('/destination', function () {
-    return view('destination');
-})->name('destination');
+Route::match(['get', 'post'], '/product', [ProductController::class, 'list'])->name('product');
+Route::match(['get','post'], '/destination', [DestinationController::class, 'list'])->name('destination');
 
 Route::match(['post', 'get'], '/search', function (Request $request) {
     $term = $request->term;
