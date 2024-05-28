@@ -8,29 +8,30 @@
 				@csrf
 				<div class="navbar bg-transparent border-0 py-1 mb-2">
 					<div class="container-fluid">
+						<input id="iptCategory" type="hidden" name="category" value="all">
 						<ul class="nav nav-tabs border-bottom-0 align-items-center mx-auto" role="tablist">
 							<li class="nav-item">
-								<a href="#" class="navbar-nav-link navbar-nav-link-icon nav-search active" id="all-tab-search" data-bs-toggle="tab" data-bs-target="#all-search" type="button" role="tab" aria-controls="all" aria-selected="true">
-									<div class="d-flex align-items-center mx-md-1">
-										<i class="ph-house"></i>
-										<span class="ms-2">Semua Kategori</span>
-									</div>
+								<a href="#" class="navbar-nav-link navbar-nav-link-icon nav-search active" id="all-tab-search" data-bs-toggle="tab" data-bs-target="#all-search" type="button" role="tab" aria-controls="all" aria-selected="true" data-value="all">
+										<div class="d-flex align-items-center mx-md-1">
+											<i class="ph-house"></i>
+											<span class="ms-2">Semua Kategori</span>
+										</div>
 								</a>
 							</li>
 							<li class="nav-item ms-1">
-								<a href="#" class="navbar-nav-link navbar-nav-link-icon nav-search" id="product-tab-search" data-bs-toggle="tab" data-bs-target="#product-search" type="button" role="tab" aria-controls="product" aria-selected="true">
-									<div class="d-flex align-items-center mx-md-1">
-										<i class="ph-shopping-bag-open"></i>
-										<span class="ms-2">Produk</span>
-									</div>
+								<a href="#" class="navbar-nav-link navbar-nav-link-icon nav-search" id="product-tab-search" data-bs-toggle="tab" data-bs-target="#product-search" type="button" role="tab" aria-controls="product" aria-selected="true" data-value="product">
+										<div class="d-flex align-items-center mx-md-1">
+											<i class="ph-shopping-bag-open"></i>
+											<span class="ms-2">Produk</span>
+										</div>
 								</a>
 							</li>
 							<li class="nav-item ms-1">
-								<a href="#" class="navbar-nav-link navbar-nav-link-icon nav-search" id="destination-tab-search" data-bs-toggle="tab" data-bs-target="#destination-search" type="button" role="tab" aria-controls="destination" aria-selected="true">
-									<div class="d-flex align-items-center mx-md-1">
-										<i class="ph-map-pin-line"></i>
-										<span class="ms-2">Destinasi</span>
-									</div>
+								<a href="#" class="navbar-nav-link navbar-nav-link-icon nav-search" id="destination-tab-search" data-bs-toggle="tab" data-bs-target="#destination-search" type="button" role="tab" aria-controls="destination" aria-selected="true" data-value="destination">
+										<div class="d-flex align-items-center mx-md-1">
+											<i class="ph-map-pin-line"></i>
+											<span class="ms-2">Destinasi</span>
+										</div>
 								</a>
 							</li>
 						</ul>
@@ -54,3 +55,16 @@
 		</div>
 	</div>
 @endsection
+
+@push('script')
+	<script>
+		$(function() {
+			const tabEl = $('a[data-bs-toggle="tab"]')
+			tabEl.on('shown.bs.tab', event => {
+				let tab = $(event.target) // newly activated tab
+				// event.relatedTarget // previous active tab
+				$('#iptCategory').val(tab.data('value')) // set category value by ref tab
+			})
+		})
+	</script>
+@endpush

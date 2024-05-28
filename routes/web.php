@@ -1,17 +1,18 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DestinationController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Middleware\Authenticate;
 
 Route::get('/', function () {
     return view('home');
@@ -23,18 +24,14 @@ Route::get('/discover', function () {
 
 Route::match(['get', 'post'], '/product', [ProductController::class, 'list'])->name('product');
 Route::match(['get','post'], '/destination', [DestinationController::class, 'list'])->name('destination');
+Route::match(['get','post'], '/search', [SearchController::class, 'index'])->name('search');
 
-Route::match(['post', 'get'], '/search', function (Request $request) {
+/* Route::match(['post', 'get'], '/search', function (Request $request) {
     $term = $request->term;
     return view('search', ['term' => $term]);
-})->name('search');
+})->name('search'); */
 
-// Route::post('/detail', function (Request $request) {
-//     $slug = $request->slug;
-//     return view('detail', ['slug' => $slug]);
-// })->name('detail');
 Route::match(['GET', 'POST'],'/detail/{slug}', [ItemsController::class, 'show'])->name('detail');
-
 
 Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware(Authenticate::class);
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.auth');
