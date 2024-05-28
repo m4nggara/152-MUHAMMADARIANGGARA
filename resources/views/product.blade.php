@@ -93,15 +93,7 @@
 
 					<div class="flex-shrink-0 text-center mt-3 mt-lg-0 ms-lg-3">
 
-						<div class="my-1">
-							<i class="ph-star fs-base lh-base align-top text-warning"></i>
-							<i class="ph-star fs-base lh-base align-top text-warning"></i>
-							<i class="ph-star fs-base lh-base align-top text-warning"></i>
-							<i class="ph-star fs-base lh-base align-top text-warning"></i>
-							<i class="ph-star fs-base lh-base align-top text-warning"></i>
-						</div>
-
-						<div class="text-muted">152 viewers</div>
+						@include('viewer', ['item' => $item, 'i' => $i, 'class' => 'text-muted'])
 
 						<form action="{{ route('detail', ['slug' => $item->slug]) }}" method="post">
 							@csrf

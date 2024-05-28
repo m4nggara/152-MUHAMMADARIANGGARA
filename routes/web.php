@@ -13,6 +13,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DestinationController;
+use App\Http\Middleware\ItemViewer;
 
 Route::get('/', function () {
     return view('home');
@@ -26,12 +27,7 @@ Route::match(['get', 'post'], '/product', [ProductController::class, 'list'])->n
 Route::match(['get','post'], '/destination', [DestinationController::class, 'list'])->name('destination');
 Route::match(['get','post'], '/search', [SearchController::class, 'index'])->name('search');
 
-/* Route::match(['post', 'get'], '/search', function (Request $request) {
-    $term = $request->term;
-    return view('search', ['term' => $term]);
-})->name('search'); */
-
-Route::match(['GET', 'POST'],'/detail/{slug}', [ItemsController::class, 'show'])->name('detail');
+Route::match(['GET', 'POST'],'/detail/{slug}', [ItemsController::class, 'show'])->middleware(ItemViewer::class)->name('detail');
 
 Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware(Authenticate::class);
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.auth');

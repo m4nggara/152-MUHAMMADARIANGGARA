@@ -50,17 +50,9 @@
                                             <li class="list-inline-item"><a href="#" class="text-muted">{{ \Carbon\Carbon::parse($item->created_at)->format('d F Y H:i:s') }}</a></li>
                                         </ul>
 
-                                        <div class="my-1">
-                                            <i class="ph-star fs-base lh-base align-top text-warning"></i>
-                                            <i class="ph-star fs-base lh-base align-top text-warning"></i>
-                                            <i class="ph-star fs-base lh-base align-top text-warning"></i>
-                                            <i class="ph-star fs-base lh-base align-top text-warning"></i>
-                                            <i class="ph-star fs-base lh-base align-top text-warning"></i>
-                                        </div>
-                
-                                        <div class="text-muted mb-4">152 viewers</div>
+                                        @include('viewer', ['item' => $item, 'i' => $i, 'class' => 'text-muted'])
 
-                                        <p class="mb-3">{!! substr(strip_tags($item->desc), 0, 600) !!} ...</p>
+                                        <p class="mb-3 mt-3">{!! substr(strip_tags($item->desc), 0, 600) !!} ...</p>
 
                                         <form action="{{ route('detail', ['slug' => $item->slug]) }}" method="post">
                                             @csrf

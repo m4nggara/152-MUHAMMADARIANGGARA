@@ -21,6 +21,8 @@
     {{-- styles --}}
     <link href="{{ url('assets/css/styles.css') }}" rel="stylesheet" type="text/css">
 
+    {{ session()->put('previousUrl', url()->current()) }}
+
     <style>
         * {
             font-family: 'Poppins', "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"

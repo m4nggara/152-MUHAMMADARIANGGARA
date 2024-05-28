@@ -68,4 +68,9 @@ class Item extends Model
     {
         $query->where('category_id', '=', 2);
     }
+
+    public function scopeViewer(Builder $query): int
+    {
+        return $query->join('viewers', 'items.id', '=', 'viewers.item_id')->where('items.id','=', $this->id)->count();
+    }
 }
