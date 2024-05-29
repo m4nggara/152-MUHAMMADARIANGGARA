@@ -20,19 +20,25 @@ class LoginController extends Controller
             'email.email' => 'Format email tidak sesuai',
             'password.required' => 'Password harus diisi'
         ]);
- 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
- 
-            return redirect()->intended('admin');
-        }
 
         $user = User::where('email', $request->email)->first();
+
+        if(!isset($user)) {
+            return back()->withErrors([
+                'email' => 'Pengguna tidak ditemukan.',
+            ])->onlyInput('email');
+        }
 
         if(!Hash::check($request->password, $user->password)) {
             return back()->withErrors([
                 'password' => 'Password pengguna tidak sesuai.',
             ])->onlyInput('password');
+        }
+ 
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+ 
+            return redirect()->intended('admin');
         }
  
         return back()->withErrors([
