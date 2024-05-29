@@ -56,7 +56,7 @@
 
                                         <form action="{{ route('detail', ['slug' => $item->slug]) }}" method="post">
                                             @csrf
-                                            <button type="submit" class="btn mt-3" style="background-color: #E9BE26 !important; border-color: #E9BE26 !important;">
+                                            <button type="submit" class="btn my-3 mt-2" style="background-color: #E9BE26 !important; border-color: #E9BE26 !important;">
                                                 <i class="ph-eye me-2"></i>
                                                 Lihat Detail
                                             </button>

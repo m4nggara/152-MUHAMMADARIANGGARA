@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Item extends Model
 {
@@ -57,6 +58,11 @@ class Item extends Model
     public function userBy(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'created_by');
+    }
+
+    public function viewers(): HasMany
+    {
+        return $this->hasMany(Viewer::class, 'item_id', 'id');
     }
 
     public function scopeProduct(Builder $query): void

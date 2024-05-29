@@ -77,7 +77,7 @@
 						</h6>
 
 						<ul class="list-inline list-inline-bullet mb-3 mb-lg-2 text-muted">
-							<li class="list-inline-item"><a href="#" class="text-muted">By Admin</a></li>
+							<li class="list-inline-item"><a href="#" class="text-muted">By {{ $item->userBy != null ? $item->userBy->name : $item->created_by}}</a></li>
 							<li class="list-inline-item"><a href="#" class="text-muted">{{ \Carbon\Carbon::parse($item->created_at)->format('d F Y H:i:s') }}</a></li>
 						</ul>
 

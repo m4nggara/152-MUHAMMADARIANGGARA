@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Middleware\ItemViewer;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UsersController;
@@ -10,29 +12,27 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DiscoverController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DestinationController;
-use App\Http\Middleware\ItemViewer;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-
-Route::get('/discover', function () {
-    return view('discover');
-})->name('discover');
-
+/* Route Global */
+Route::match(['get','post'], '/', HomeController::class)->name('home');
+Route::match(['get','post'], '/discover', DiscoverController::class)->name('discover');
 Route::match(['get', 'post'], '/product', [ProductController::class, 'list'])->name('product');
 Route::match(['get','post'], '/destination', [DestinationController::class, 'list'])->name('destination');
 Route::match(['get','post'], '/search', [SearchController::class, 'index'])->name('search');
+Route::match(['get', 'post'],'/detail/{slug}', [ItemsController::class, 'show'])->middleware(ItemViewer::class)->name('detail');
+/* End Global */
 
-Route::match(['GET', 'POST'],'/detail/{slug}', [ItemsController::class, 'show'])->middleware(ItemViewer::class)->name('detail');
-
+/* Route Auth */
 Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware(Authenticate::class);
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.auth');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
+/* End Auth */
 
+/* Route Admin */
 Route::prefix('admin')->as('admin.')->group(function () {
     Route::middleware(['auth'])->group(function () {
         Route::get('/', DashboardController::class)->name('dashboard');
@@ -48,5 +48,6 @@ Route::prefix('admin')->as('admin.')->group(function () {
         });
     });
 });
+/* End Admin */
 
 

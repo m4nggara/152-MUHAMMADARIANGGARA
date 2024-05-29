@@ -9,13 +9,14 @@
 		</div>
 	</div>
 	<div class="container">
+
 		<div class="mb-3">
 			<h6 class="mb-0 fw-bold">Produk Lokal Terbaik</h6>
 			<span class="text-muted">Rekomendasi produk lokal terbaik.</span>
 		</div>
 
 		<div class="row">
-			<div class="col-lg-4">
+			{{-- <div class="col-lg-4">
 
 				<div class="card">
 					<div class="card-header">
@@ -78,7 +79,6 @@
 				</div>
 			
 			</div>
-			
 			<div class="col-lg-4">
 
 				<div class="card">
@@ -107,7 +107,56 @@
 					</div>
 				</div>
 
+			</div> --}}
+
+			@forelse ($productPopuler as $product)	
+			@php
+				$item = \App\Models\Item::withTrashed()->with('userBy')->find($product->id);
+			@endphp
+			<div class="col-lg-4">
+
+				<div class="card">
+					<div class="card-header">
+						<h5 class="mb-0"><a href="{{ route('detail', ['slug' => $item->slug]) }}" class="text-body">{{ $item->name }}</a></h5>
+					</div>
+
+					<div class="card-body">
+						<div class="card-img-actions mb-3">
+							@php
+								$urlImg = $item->img_path_banner;
+								if(Storage::disk('public')->exists($urlImg)) {
+									$urlImg = Storage::disk('public')->url($urlImg);
+								}
+							@endphp
+							<img class="card-img img-fluid" src="{{ $urlImg }}" alt="">
+							<div class="card-img-actions-overlay card-img">
+								<a href="{{ $urlImg }}" class="btn btn-outline-white btn-icon rounded-pill">
+									<i class="ph-link"></i>
+								</a>
+							</div>
+						</div>
+
+						{!! substr(strip_tags($item->desc), 0, 800) !!} ... <a href="{{ route('detail', ['slug' => $item->slug]) }}" class="text-secondary">lihat detail</a>
+					</div>
+
+					<div class="card-body d-sm-flex justify-content-sm-between align-items-sm-center pt-0">
+						<ul class="list-inline list-inline-bullet text-muted mb-3 mb-sm-0">
+							<li class="list-inline-item">By <a href="" class="text-body">{{ $item->userBy != null ? $item->userBy->name : $item->created_by }}</a></li>
+							<li class="list-inline-item">{{ \Carbon\Carbon::parse($item->created_at)->format('d F Y') }}</li>
+						</ul>
+
+						<a href="{{ route('detail', ['slug' => $item->slug]) }}" class="d-inline-flex align-items-center text-body">
+							<i class="ph-binoculars text-pink me-2"></i>
+							{{ $product->jml }}
+						</a>
+					</div>
+				</div>
+
 			</div>
+			@empty
+				
+			@endforelse
+
 		</div>
 
 		<div class="mb-3 pt-2">
@@ -116,7 +165,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-lg-4">
+			{{-- <div class="col-lg-4">
 
 				<div class="card">
 					<div class="card-header">
@@ -184,7 +233,6 @@
 				</div>
 			
 			</div>
-			
 			<div class="col-lg-4">
 
 				<div class="card">
@@ -218,7 +266,56 @@
 					</div>
 				</div>
 
+			</div> --}}
+
+			@forelse ($destinationPopuler as $destination)	
+			@php
+				$item = \App\Models\Item::withTrashed()->with('userBy')->find($destination->id);
+			@endphp
+			<div class="col-lg-4">
+
+				<div class="card">
+					<div class="card-header">
+						<h5 class="mb-0"><a href="{{ route('detail', ['slug' => $item->slug]) }}" class="text-body">{{ $item->name }}</a></h5>
+					</div>
+
+					<div class="card-body">
+						<div class="card-img-actions mb-3">
+							@php
+								$urlImg = $item->img_path_banner;
+								if(Storage::disk('public')->exists($urlImg)) {
+									$urlImg = Storage::disk('public')->url($urlImg);
+								}
+							@endphp
+							<img class="card-img img-fluid" src="{{ $urlImg }}" alt="">
+							<div class="card-img-actions-overlay card-img">
+								<a href="{{ $urlImg }}" class="btn btn-outline-white btn-icon rounded-pill">
+									<i class="ph-link"></i>
+								</a>
+							</div>
+						</div>
+
+						{!! substr(strip_tags($item->desc), 0, 800) !!} ... <a href="{{ route('detail', ['slug' => $item->slug]) }}" class="text-secondary">lihat detail</a>
+					</div>
+
+					<div class="card-body d-sm-flex justify-content-sm-between align-items-sm-center pt-0">
+						<ul class="list-inline list-inline-bullet text-muted mb-3 mb-sm-0">
+							<li class="list-inline-item">By <a href="" class="text-body">{{ $item->userBy != null ? $item->userBy->name : $item->created_by }}</a></li>
+							<li class="list-inline-item">{{ \Carbon\Carbon::parse($item->created_at)->format('d F Y') }}</li>
+						</ul>
+
+						<a href="{{ route('detail', ['slug' => $item->slug]) }}" class="d-inline-flex align-items-center text-body">
+							<i class="ph-binoculars text-pink me-2"></i>
+							{{ $destination->jml }}
+						</a>
+					</div>
+				</div>
+
 			</div>
+			@empty
+				
+			@endforelse
+
 		</div>
 
 	</div>

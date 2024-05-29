@@ -37,6 +37,7 @@
                     <div>
                         Total Item
                         <div class="fs-sm opacity-75">Jumlah item aktif : {{ $items->whereNull('deleted_at')->count() ?? 0 }}</div>
+                        <div class="fs-sm opacity-75">Total viewer : {{ \App\Models\Item::whereHas('viewers')->count() ?? 0 }}</div>
                     </div>
                 </div>
 
@@ -56,6 +57,7 @@
                     <div>
                         Total Produk
                         <div class="fs-sm opacity-75">Jumlah produk aktif : {{ $items->where('category_id', 1)->whereNull('deleted_at')->count() ?? 0 }}</div>
+                        <div class="fs-sm opacity-75">Jumlah viewer : {{  \App\Models\Item::product()->whereHas('viewers')->count() ?? 0 }}</div>
                     </div>
                 </div>
             </div>
@@ -74,6 +76,7 @@
                     <div>
                         Total Destinasi
                         <div class="fs-sm opacity-75">Jumlah destinasi aktif : {{ $items->where('category_id', 2)->whereNull('deleted_at')->count() ?? 0 }}</div>
+                        <div class="fs-sm opacity-75">Jumlah viewer : {{  \App\Models\Item::destination()->whereHas('viewers')->count() ?? 0 }}</div>
                     </div>
                 </div>
             </div>
