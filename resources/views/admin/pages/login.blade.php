@@ -62,7 +62,7 @@
 								<div class="mb-3">
 									<label class="form-label">Username</label>
 									<div class="form-control-feedback form-control-feedback-start">
-										<input type="text" class="form-control" placeholder="tenjo@kampung.com" name="email" value="admin@tenjokampung.com">
+										<input type="text" class="form-control" placeholder="tenjo@kampung.com" name="email">
 										<div class="form-control-feedback-icon">
 											<i class="ph-user-circle text-muted"></i>
 										</div>
@@ -72,7 +72,7 @@
 								<div class="mb-3">
 									<label class="form-label">Password</label>
 									<div class="form-control-feedback form-control-feedback-start">
-										<input type="password" class="form-control" placeholder="•••••••••••" name="password" value="12345678">
+										<input type="password" class="form-control" placeholder="•••••••••••" name="password">
 										<div class="form-control-feedback-icon">
 											<i class="ph-lock text-muted"></i>
 										</div>
