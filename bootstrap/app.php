@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -15,10 +16,12 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        // only on Production
-        if(App::environment('production')) {
-            if ($exceptions instanceof \Illuminate\Session\TokenMismatchException) {
-                return redirect('/')->with('message', 'Your session has expired. Please try again.');
+        $exceptions->render(function (Throwable $e) {
+                // only on Production
+            if(App::environment('production')) {
+                if ($e instanceof \Illuminate\Session\TokenMismatchException || $e->getMessage() == 'CSRF token mismatch.') {
+                    return redirect()->route('home')->with('message', 'Your session has expired. Please try again.');
+                }
             }
-        }
+        });
     })->create();
