@@ -14,15 +14,17 @@
 @php
     $jmlstar = $item->viewer();
     $viewer = $jmlstar;
+    if($jmlstar > 0)  {
 
-    /* Rumus ala-ala untuk menghitung perolahan bintang */
-    $totalStar = \App\Models\Viewer::whereHas('item', function($query) use($item) {
-        $query->where('category_id', $item->category_id);
-    })->count();
-    $totalItem = \App\Models\Item::where('category_id', $item->category_id)->count();
-    $avgStar = $totalStar / $totalItem;
-    $nilaiStar = $jmlstar / $totalStar;
-    $jmlstar = ceil($nilaiStar * $avgStar);
+        /* Rumus ala-ala untuk menghitung perolahan bintang */
+        $totalStar = \App\Models\Viewer::whereHas('item', function($query) use($item) {
+            $query->where('category_id', $item->category_id);
+        })->count();
+        $totalItem = \App\Models\Item::where('category_id', $item->category_id)->count();
+        $avgStar = $totalStar / $totalItem;
+        $nilaiStar = $jmlstar / $totalStar;
+        $jmlstar = ceil($nilaiStar * $avgStar);
+    }
 @endphp
 <div class="mt-1 mb-0 p-0">
     @for ($j = 1; $j <= $jmlstar; $j++)
