@@ -29,5 +29,34 @@ _Tenjo Kampung_ is a website local product and destination guidance platform. Gu
 | -- | -- | -- |
 | ![Home](https://github.com/m4nggara/152-MUHAMMADARIANGGARA/assets/169231752/331212a3-e78c-4c8e-9797-c3e01990e7c9) | ![Pencarian](https://github.com/m4nggara/152-MUHAMMADARIANGGARA/assets/169231752/c0119c6f-5295-4642-afee-9283462a4698) | ![Tampil Destinasi](https://github.com/m4nggara/152-MUHAMMADARIANGGARA/assets/169231752/7b725d34-6042-4bae-8026-9779bc106bd4) |
 
+### Preview
+| Home | Pencarian | Tampil Pencarian | Halaman Admin |
+| -- | -- | -- | -- |
+| ![image](https://github.com/m4nggara/152-MUHAMMADARIANGGARA/assets/169231752/8c02ebb7-909f-4000-8cf4-45ac1dea2dc3) | ![image](https://github.com/m4nggara/152-MUHAMMADARIANGGARA/assets/169231752/cf09890b-bc62-47c4-91e7-d61c534b2c62) | ![image](https://github.com/m4nggara/152-MUHAMMADARIANGGARA/assets/169231752/f7b0d6ee-11dc-40e0-b4a5-17ea9e58be32) | ![image](https://github.com/m4nggara/152-MUHAMMADARIANGGARA/assets/169231752/2dd5331b-55f8-49d6-84af-eb8897d9f434) |
+
+
+
+
+
+### QUICK INSTALLATION
+----
+> Requirement : **Laravel 11** dan **MySQL**
+1. Clone repository
+2. Run `composer install` on folder project
+3. [Download](https://drive.google.com/file/d/1US1_lSnSyB8mPScZv2myXCBiI21_V7Ka/view?usp=sharing) file `.env`. Save to folder project
+4. **ATAU** Rename file `.env.production` to `.env`
+5. Run `php artisan migrate`
+6. Run `php artisan db:seed`
+7. **[OPTIONAL]** : Run `php artisan db:seed --class=ItemSeeder`
+8. Run `php artisan serve`
+9. Kamu bisa akses aplikasi dengan mengunjungi alamat [http://localhost:8000/](http://localhost:8000/)
+10. Enjoyeeed!! 🚀 🎆 😎 🌈
+
+> Default User Admin => Email: admin@tenjokampung.com Password: 12345678
+> 
+> Link => [http://localhost:8000/admin](http://localhost:8000/admin)
+
+
+
 ##### Disclaimer
 > _This repository is for final personal project at JDA - Jabar Digital Academy_
